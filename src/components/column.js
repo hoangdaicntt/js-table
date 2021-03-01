@@ -47,6 +47,7 @@ export default class Column {
         this.container = container;
         this.table = table;
         this.columns = options.columns;
+        this.updateTable = options.updateTable;
         this.elements = {
             columns: this.container.querySelector('.jstable-yowxteo'),
             modal: this.container.querySelector('.jstable-yowxte2'),
@@ -94,38 +95,47 @@ export default class Column {
             const eye = row3.querySelector('img');
             column.element = {row1, row2, row3, row4, li, pin, eye};
             //pin
-            pin.addEventListener('click', () => {
-                if (column.pined) {
-                    column.pined = false;
+            const pinEvent = () => {
+                if (!column.pined) {
                     pin.classList.remove('jdtb-pined');
                     pin.setAttribute('src', icons.pin);
                 } else {
-                    column.pined = true;
                     pin.classList.add('jdtb-pined');
                     pin.setAttribute('src', icons.pined);
                 }
+            }
+            pin.addEventListener('click', () => {
+                column.pined = !column.pined;
+                pinEvent();
+
             });
-            eye.addEventListener('click', () => {
-                if (column.hidden) {
-                    column.hidden = false;
+            const eyeEvent = () => {
+                if (!column.hidden) {
                     eye.classList.remove('jdtb-hidden');
                     eye.setAttribute('src', icons.eye);
                     li.classList.remove('jstb-hide');
                 } else {
-                    column.hidden = true;
                     eye.classList.add('jdtb-hidden');
                     eye.setAttribute('src', icons.noneEye);
                     li.classList.add('jstb-hide');
                 }
+            }
+            eye.addEventListener('click', () => {
+                column.hidden = !column.hidden;
+                column.visible = !column.hidden;
+                eyeEvent();
+
             });
             column.index = index;
+            pinEvent();
+            eyeEvent();
             return column;
         });
         var sortable = Sortable.create(this.elements.columns);
         this.elements.colsSum.innerText = this.columns.length;
         this.elements.colsCurrent.innerText = this.columns.filter(x => !x.hidden).length;
 
-
+        this.updateSize();
     }
 
     loadInfo() {
@@ -140,22 +150,50 @@ export default class Column {
         elms.forEach(value => {
             order.push(parseInt(value.innerText));
         });
-        this.table.colReorder.reset();
-        this.table.colReorder.order(order);
+        const newColumns = order.map(x => this.columns[x]);
+        // this.table.colReorder.reset();
+        // this.table.colReorder.order(order);
+        this.columns = newColumns;
         //Visible
-        this.columns.map(value => {
-            this.table.column(value.index).visible(!value.hidden);
-        });
+        // this.columns.map(value => {
+        //     this.table.column(value.index).visible(!value.hidden);
+        // });
         this.elements.colsSum.innerText = this.columns.length;
         this.elements.colsCurrent.innerText = this.columns.filter(x => !x.hidden).length;
 
-        let totalWidth = 0;
-        let maxWidth = this.table.currentDom.clientWidth;
-        let count = this.columns.filter(x => !x.hidden).length;
-        this.columns.filter(x => !x.hidden).map((x) => totalWidth += x.width);
-        let sizePadding = (maxWidth - totalWidth) / (count - 1);
-        console.log(totalWidth, maxWidth);
-        console.log(sizePadding);
+        this.updateTable(newColumns, newColumns.filter(x => x.pined).length)
+    }
+
+    updateSize() {
+        // let totalWidth = 0;
+        // let maxWidth = this.table.currentDom.clientWidth;
+        // let count = this.columns.filter(x => !x.hidden).length;
+        // this.columns.filter(x => !x.hidden).map((x) => totalWidth += x.width);
+        // let sizePadding = (maxWidth - totalWidth) / (count - 1);
+        // console.log(totalWidth, maxWidth);
+        // console.log(sizePadding);
+        //
+        // if (sizePadding > 0) {
+        //     const cols = this.columns.filter(x => !x.hidden);
+        //
+        //     cols.map((x, index) => {
+        //         if (cols.length - 1 > index) {
+        //             const width = x.width + sizePadding;
+        //             console.log(width);
+        //             this.table.currentDom.querySelectorAll('.dataTable tr>th:nth-child(' + (index + 1) + ')').forEach((value) => {
+        //                 value.style.width = width + 'px';
+        //             });
+        //             this.table.currentDom.querySelectorAll('.dataTable tr>td:nth-child(' + (index + 1) + ')').forEach(value => {
+        //                 value.style.paddingRight = sizePadding + 'px';
+        //             });
+        //         }
+        //
+        //     });
+        // }
+    }
+
+    setTable(tb) {
+        this.table = tb;
     }
 
     events() {

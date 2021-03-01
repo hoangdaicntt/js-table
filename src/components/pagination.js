@@ -39,6 +39,10 @@ export default class Pagination {
         this.elements.input.value = (info.page + 1);
     }
 
+    setTable(tb) {
+        this.table = tb;
+    }
+
     events() {
         this.table.on('draw.dt', () => {
             this.loadInfo();

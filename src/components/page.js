@@ -53,12 +53,17 @@ export default class Paging {
         li.classList.add('active');
         this.elements.currentLimit.innerText = data;
         this.toggleLimit(false);
+        this.table.page.len(data).draw();
     }
 
     loadInfo() {
         const info = this.table.page.info();
         this.elements.max.innerText = info.recordsTotal;
         this.elements.current.innerText = info.end;
+    }
+
+    setTable(tb) {
+        this.table = tb;
     }
 
     events() {

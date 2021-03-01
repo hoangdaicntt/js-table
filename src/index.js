@@ -6,6 +6,10 @@ import icons from "./components/icons";
 import Paging from "./components/page";
 import Column from "./components/column";
 import Filter from "./components/filter";
+// import "dt-colresize";
+import "dt-colresize/css/dataTables.colResize.css"
+import "datatables.net-fixedcolumns-dt";
+import "datatables.net-fixedcolumns-dt/css/fixedColumns.dataTables.min.css";
 
 export default class JsTable {
     constructor(dom, options) {
@@ -14,18 +18,30 @@ export default class JsTable {
         this.column = new Column();
         this.filter = new Filter();
 
+        this.columns = options.columns;
+        this.options = options;
+        this.dom = dom;
+
         this.initUI(dom);
         this.table = $('#' + this.idTable).DataTable({
             data: [],
-            columns: options.columns,
+            columns: this.columns,
+            colReorder: true,
+            colResize: true,
+            autoWidth: false,
             scrollX: true,
-            colReorder: true
+            fixedColumns: {
+                leftColumns: 0
+            }
         });
         this.table.currentDom = this.container;
 
         this.pagination.init(this.table, this.containerFooter);
         this.column.init(this.table, this.containerHead, {
-            columns: options.columns
+            columns: this.columns,
+            updateTable: (columns, fixedColumns) => {
+                this.updateTable(columns, fixedColumns)
+            }
         });
         this.filter.init(this.table, this.containerHead, {
             filters: options.filters
@@ -35,6 +51,57 @@ export default class JsTable {
         });
 
         this.events()
+    }
+
+    updateTable(columns, fixedColumns = 0) {
+        this.container.remove();
+        this.columns = columns;
+        this.table.destroy();
+
+        this.pagination = new Pagination();
+        this.paging = new Paging();
+        this.column = new Column();
+        this.filter = new Filter();
+
+        this.initUI(this.dom);
+        this.table = $('#' + this.idTable).DataTable({
+            data: [],
+            columns: this.columns,
+            colReorder: true,
+            colResize: true,
+            autoWidth: false,
+            scrollX: true,
+            fixedColumns: {
+                leftColumns: fixedColumns
+            }
+        });
+        this.table.currentDom = this.container;
+
+        this.pagination.init(this.table, this.containerFooter);
+        this.column.init(this.table, this.containerHead, {
+            columns: this.columns,
+            updateTable: (columns, fixedColumns) => {
+                this.updateTable(columns, fixedColumns)
+            }
+        });
+        this.filter.init(this.table, this.containerHead, {
+            filters: this.options.filters
+        });
+        this.paging.init(this.table, this.containerFooter, {
+            pages: this.options.pages ? this.options.pages : [10, 20, 30, 50]
+        });
+
+        this.events()
+
+        this.setData(this.data);
+
+        if (this.onUpdateColumnsCallback) {
+            this.onUpdateColumnsCallback(columns)
+        }
+    }
+
+    onUpdateColumns(callback) {
+        this.onUpdateColumnsCallback = callback;
     }
 
     initUI(dom) {
@@ -86,6 +153,7 @@ export default class JsTable {
     }
 
     setData(data) {
+        this.data = data;
         this.table.clear();
         this.table.rows.add(data).draw();
     }

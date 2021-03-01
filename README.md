@@ -35,9 +35,19 @@ Js Render
     });
     // Đặt dữ liệu cho bảng
     jsTable.setData(data);
+    
+    // Khi cập nhật cột, kéo thả, gim
+    jsTable.onUpdateColumns((columns)=>{
+        console.log('new columns', columns)
+    })
 </script>
 ```
 
+## Event
+#### onUpdateColumns(callback): 
+- callback(columns)
+
+## Save
 
 
 See the [CONTRIBUTING Guidelines](https://github.com/hoangdaicntt/js-select/blob/master/CONTRIBUTING.md)
