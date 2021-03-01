@@ -456,3 +456,46 @@ button.jstable-yowxtey {
     height: 32px;
     color: #7F8FA4;
 }
+
+ul.jstable-yowxteo > li > span:nth-child(1) img {
+    opacity: 0;
+}
+
+ul.jstable-yowxteo > li:hover span:nth-child(1) img {
+    opacity: 1;
+    cursor: move;
+}
+
+li.jstb-hide {
+    opacity: 0.3;
+}
+
+.jstable-oeirueyr4 {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    width: 350px;
+    padding: 16px;
+    height: auto;
+    position: absolute;
+    z-index: 9;
+}
+
+.js-select-dropdown {
+    position: initial !important;
+}
+
+.jstable-iyorty {
+    position: relative;
+}
+
+.jstable-oeirueyr4::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 10px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #ffffff transparent;
+}

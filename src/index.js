@@ -1,5 +1,6 @@
 import * as $ from 'jquery';
 import "datatables.net-dt";
+import "datatables.net-colreorder-dt";
 import Pagination from "./components/pagination";
 import icons from "./components/icons";
 import Paging from "./components/page";
@@ -17,14 +18,17 @@ export default class JsTable {
         this.table = $('#' + this.idTable).DataTable({
             data: [],
             columns: options.columns,
-            "scrollX": true
+            scrollX: true,
+            colReorder: true
         });
 
         this.pagination.init(this.table, this.containerFooter);
         this.column.init(this.table, this.containerHead, {
             columns: options.columns
         });
-        this.filter.init(this.table, this.containerHead);
+        this.filter.init(this.table, this.containerHead, {
+            filters: options.filters
+        });
         this.paging.init(this.table, this.containerFooter, {
             pages: options.pages ? options.pages : [10, 20, 30, 50]
         });
@@ -66,12 +70,7 @@ export default class JsTable {
 
         //Bộ lọc đầu trang
         this.templateHead = `
-            <div class="jstable-iyorty">
-                <button class="jstable-iyorty2">
-                    <span class="jstable-iyorty4">Bộ lọc</span>
-                    <img class="jstable-iyorty3" src="${icons.filter}">
-                </button>
-            </div>
+            ${this.filter.render()}
             <div class="jstable-jhiypfe">
                 <div class="jstable-jhiypfey">
                     <span class="jstable-jhiypfey5">Bộ lọc lưu sẵn <img src="${icons.arrowDown}"></span>

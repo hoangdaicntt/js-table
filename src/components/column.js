@@ -53,6 +53,9 @@ export default class Column {
             modalCancel: this.container.querySelector('.jstable-yowxtey'),
             modalClose: this.container.querySelector('.jstable-yowxte7'),
             openSetting: this.container.querySelector('.jstable-jhiypfeojre'),
+            modalSubmit: this.container.querySelector('.jstable-yowxtel'),
+            colsSum: this.container.querySelector('.jstable-jhiypfeojub'),
+            colsCurrent: this.container.querySelector('.jstable-jhiypfeojtr'),
         }
 
         this.renderColumn();
@@ -63,8 +66,16 @@ export default class Column {
         this.elements.modal.style.display = show ? 'flex' : 'none';
     }
 
+    toggleView() {
+
+    }
+
+    togglePin() {
+
+    }
+
     renderColumn() {
-        this.columns.map((column, index) => {
+        this.columns = this.columns.map((column, index) => {
             const li = document.createElement('li');
             const row1 = document.createElement('span');
             const row2 = document.createElement('span');
@@ -78,15 +89,63 @@ export default class Column {
             row2.innerHTML = column.title;
             row3.innerHTML = `<img src="${icons.eye}">`;
             row4.innerHTML = `<img src="${icons.pin}">`;
-
             this.elements.columns.appendChild(li);
+            const pin = row4.querySelector('img');
+            const eye = row3.querySelector('img');
+            column.element = {row1, row2, row3, row4, li, pin, eye};
+            //pin
+            pin.addEventListener('click', () => {
+                if (column.pined) {
+                    column.pined = false;
+                    pin.classList.remove('jdtb-pined');
+                    pin.setAttribute('src', icons.pin);
+                } else {
+                    column.pined = true;
+                    pin.classList.add('jdtb-pined');
+                    pin.setAttribute('src', icons.pined);
+                }
+            });
+            eye.addEventListener('click', () => {
+                if (column.hidden) {
+                    column.hidden = false;
+                    eye.classList.remove('jdtb-hidden');
+                    eye.setAttribute('src', icons.eye);
+                    li.classList.remove('jstb-hide');
+                } else {
+                    column.hidden = true;
+                    eye.classList.add('jdtb-hidden');
+                    eye.setAttribute('src', icons.noneEye);
+                    li.classList.add('jstb-hide');
+                }
+            });
+            column.index = index;
+            return column;
         });
         var sortable = Sortable.create(this.elements.columns);
-        console.log(sortable);
+        this.elements.colsSum.innerText = this.columns.length;
+        this.elements.colsCurrent.innerText = this.columns.filter(x => !x.hidden).length;
     }
 
     loadInfo() {
         const info = this.table.page.info();
+
+    }
+
+    submitSetting() {
+        //Sort
+        const elms = this.container.querySelectorAll("ul.jstable-yowxteo > li > span:nth-child(1) > i");
+        let order = [];
+        elms.forEach(value => {
+            order.push(parseInt(value.innerText));
+        });
+        this.table.colReorder.reset();
+        this.table.colReorder.order(order);
+        //Visible
+        this.columns.map(value => {
+            this.table.column(value.index).visible(!value.hidden);
+        });
+        this.elements.colsSum.innerText = this.columns.length;
+        this.elements.colsCurrent.innerText = this.columns.filter(x => !x.hidden).length;
     }
 
     events() {
@@ -97,6 +156,10 @@ export default class Column {
             this.toggleModel(false);
         });
         this.elements.modalClose.addEventListener('click', () => {
+            this.toggleModel(false);
+        })
+        this.elements.modalSubmit.addEventListener('click', () => {
+            this.submitSetting();
             this.toggleModel(false);
         })
         this.elements.openSetting.addEventListener('click', () => {

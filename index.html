@@ -19,6 +19,7 @@
             array[j] = temp;
         }
     }
+
     let data = [
         {
             "FIELD1": "29C9-6519",
@@ -490,6 +491,52 @@
                 "width": 170,
             }
         ],
+        filters: [
+            {
+                id: 'old',
+                name: 'Độ tuổi',
+                type: 'range'
+            },
+            {
+                id: 'group',
+                name: 'Theo nhóm xe',
+                type: 'selection',
+                options: [
+                    {id:'1',name:'Nhóm xe tự tạo 0'},
+                    {id:'1',name:'Nhóm xe tự tạo 1'},
+                    {id:'1',name:'Nhóm xe tự tạo 2'},
+                    {id:'1',name:'Nhóm xe tự tạo 3'},
+                    {id:'1',name:'Nhóm xe tự tạo 4'},
+                    {id:'1',name:'Nhóm xe tự tạo 5'},
+                    {id:'1',name:'Nhóm xe tự tạo 6'},
+                    {id:'1',name:'Nhóm xe tự tạo 7'},
+                    {id:'1',name:'Nhóm xe tự tạo 8'},
+                    {id:'1',name:'Nhóm xe tự tạo 9'},
+                    {id:'1',name:'Nhóm xe tự tạo 10'},
+                    {id:'1',name:'Nhóm xe tự tạo 11'},
+                ]
+            },
+            {
+                id: 'group',
+                name: 'Giới tính',
+                type: 'option',
+                options: [
+                    {id: 'nam', name: 'Nam'},
+                    {id: 'nu', name: 'Nữ'},
+                    {id: 'none', name: 'Không rõ'},
+                ]
+            },
+            {
+                id: 'group',
+                name: 'Quê quán',
+                type: 'option',
+                options: [
+                    {id: '1', name: 'Hà Nội'},
+                    {id: '2', name: 'Hồ Chí Minh'},
+                    {id: '3', name: 'Nghệ An'},
+                ]
+            }
+        ]
     });
 
     jsTable.setData(data);
