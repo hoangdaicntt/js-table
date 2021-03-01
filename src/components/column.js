@@ -124,6 +124,8 @@ export default class Column {
         var sortable = Sortable.create(this.elements.columns);
         this.elements.colsSum.innerText = this.columns.length;
         this.elements.colsCurrent.innerText = this.columns.filter(x => !x.hidden).length;
+
+
     }
 
     loadInfo() {
@@ -146,6 +148,14 @@ export default class Column {
         });
         this.elements.colsSum.innerText = this.columns.length;
         this.elements.colsCurrent.innerText = this.columns.filter(x => !x.hidden).length;
+
+        let totalWidth = 0;
+        let maxWidth = this.table.currentDom.clientWidth;
+        let count = this.columns.filter(x => !x.hidden).length;
+        this.columns.filter(x => !x.hidden).map((x) => totalWidth += x.width);
+        let sizePadding = (maxWidth - totalWidth) / (count - 1);
+        console.log(totalWidth, maxWidth);
+        console.log(sizePadding);
     }
 
     events() {

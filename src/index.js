@@ -21,6 +21,7 @@ export default class JsTable {
             scrollX: true,
             colReorder: true
         });
+        this.table.currentDom = this.container;
 
         this.pagination.init(this.table, this.containerFooter);
         this.column.init(this.table, this.containerHead, {
@@ -32,6 +33,8 @@ export default class JsTable {
         this.paging.init(this.table, this.containerFooter, {
             pages: options.pages ? options.pages : [10, 20, 30, 50]
         });
+
+        this.events()
     }
 
     initUI(dom) {
@@ -85,5 +88,9 @@ export default class JsTable {
     setData(data) {
         this.table.clear();
         this.table.rows.add(data).draw();
+    }
+
+    events() {
+
     }
 }

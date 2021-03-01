@@ -24,6 +24,7 @@ td {
     text-align: left;
     padding: 10px 0px;
     background-color: white;
+    padding-right: 16px;
 }
 
 table td:first-child, table th:first-child {
@@ -45,6 +46,7 @@ th {
     text-align: left;
     padding: 5px 0;
     min-height: 40px;
+    padding-right: 16px;
 }
 
 .dataTables_scroll {
@@ -479,9 +481,10 @@ li.jstb-hide {
     height: auto;
     position: absolute;
     z-index: 9;
+    display: none;
 }
 
-.js-select-dropdown {
+.jstable-jssleofir .js-select-dropdown {
     position: initial !important;
 }
 
