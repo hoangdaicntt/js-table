@@ -1,0 +1,20 @@
+{
+  "projects": {
+    "default": "facebookapp-0001"
+  },
+  "targets": {
+    "facebookapp-0001": {
+      "hosting": {
+        "js-table": [
+          "facebookapp-0001"
+        ],
+        "jstable": [
+          "js-table"
+        ],
+        "js-table-hd": [
+          "js-table-hd"
+        ]
+      }
+    }
+  }
+}

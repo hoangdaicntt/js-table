@@ -407,6 +407,148 @@
     // }
     // shuffleArray(data);
 
+    // Example filters
+    const filtersSaved = [
+        {
+            name: 'Bộ lọc đã lưu 1',
+            createdAt: '07/03/2021 23:00',
+            createdBy: {
+                name: 'Trần Quang Minh',
+                description: 'TP. Kinh Doanh',
+                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+            },
+            description: '',
+            filters: [{
+                "name": "Độ tuổi",
+                "type": "range",
+                "value": {"operator": "<=", "value": "56"}
+            }, {
+                "name": "Theo nhóm xe",
+                "type": "selection",
+                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+                    "id": "1",
+                    "name": "Nhóm xe tự tạo 3",
+                    "checked": true
+                }]
+            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+        },
+        {
+            name: 'Bộ lọc đã lưu 1',
+            createdAt: '07/03/2021 23:00',
+            createdBy: {
+                name: 'Trần Quang Minh',
+                description: 'TP. Kinh Doanh',
+                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+            },
+            description: '',
+            filters: [{
+                "name": "Độ tuổi",
+                "type": "range",
+                "value": {"operator": "<=", "value": "56"}
+            }, {
+                "name": "Theo nhóm xe",
+                "type": "selection",
+                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+                    "id": "1",
+                    "name": "Nhóm xe tự tạo 3",
+                    "checked": true
+                }]
+            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+        },
+        {
+            name: 'Bộ lọc đã lưu 1',
+            createdAt: '07/03/2021 23:00',
+            createdBy: {
+                name: 'Trần Quang Minh',
+                description: 'TP. Kinh Doanh',
+                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+            },
+            description: '',
+            filters: [{
+                "name": "Độ tuổi",
+                "type": "range",
+                "value": {"operator": "<=", "value": "56"}
+            }, {
+                "name": "Theo nhóm xe",
+                "type": "selection",
+                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+                    "id": "1",
+                    "name": "Nhóm xe tự tạo 3",
+                    "checked": true
+                }]
+            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+        },
+        {
+            name: 'Bộ lọc đã lưu 1',
+            createdAt: '07/03/2021 23:00',
+            createdBy: {
+                name: 'Trần Quang Minh',
+                description: 'TP. Kinh Doanh',
+                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+            },
+            description: '',
+            filters: [{
+                "name": "Độ tuổi",
+                "type": "range",
+                "value": {"operator": "<=", "value": "56"}
+            }, {
+                "name": "Theo nhóm xe",
+                "type": "selection",
+                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+                    "id": "1",
+                    "name": "Nhóm xe tự tạo 3",
+                    "checked": true
+                }]
+            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+        },
+        {
+            name: 'Bộ lọc đã lưu 1',
+            createdAt: '07/03/2021 23:00',
+            createdBy: {
+                name: 'Trần Quang Minh',
+                description: 'TP. Kinh Doanh',
+                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+            },
+            description: '',
+            filters: [{
+                "name": "Độ tuổi",
+                "type": "range",
+                "value": {"operator": "<=", "value": "56"}
+            }, {
+                "name": "Theo nhóm xe",
+                "type": "selection",
+                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+                    "id": "1",
+                    "name": "Nhóm xe tự tạo 3",
+                    "checked": true
+                }]
+            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+        },
+        {
+            name: 'Bộ lọc đã lưu 1',
+            createdAt: '07/03/2021 23:00',
+            createdBy: {
+                name: 'Trần Quang Minh',
+                description: 'TP. Kinh Doanh',
+                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+            },
+            description: '',
+            filters: [{
+                "name": "Độ tuổi",
+                "type": "range",
+                "value": {"operator": "<=", "value": "56"}
+            }, {
+                "name": "Theo nhóm xe",
+                "type": "selection",
+                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+                    "id": "1",
+                    "name": "Nhóm xe tự tạo 3",
+                    "checked": true
+                }]
+            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+        }
+    ];
+
 
     const jsTable = new JSTable('#js-table', {
         columns: [
@@ -540,10 +682,23 @@
     });
 
     jsTable.setData(data);
+    jsTable.setFiltersSaved(filtersSaved);
 
     jsTable.onUpdateColumns((columns) => {
         console.log('new columns', columns);
-    })
+    });
+
+    jsTable.onFilterChange((filters, next) => {
+        console.log(JSON.stringify(filters));
+        console.log('new filters', filters);
+        // filter here
+        // example
+        const newData = filters.length > 0 ? data.filter(x => x.FIELD4 === "647") : data;
+        //.....
+
+        // after update data
+        next(newData);
+    });
 </script>
 </body>
 </html>

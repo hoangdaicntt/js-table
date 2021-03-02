@@ -94,14 +94,27 @@ export default class JsTable {
         this.events()
 
         this.setData(this.data);
+        this.setFiltersSaved(this.filtersSaved);
 
         if (this.onUpdateColumnsCallback) {
             this.onUpdateColumnsCallback(columns)
         }
     }
 
+    setFiltersSaved(filtersSaved) {
+        this.filtersSaved = filtersSaved;
+        this.filter.updateFiltersSaved(this.filtersSaved);
+    }
+
     onUpdateColumns(callback) {
         this.onUpdateColumnsCallback = callback;
+    }
+
+    onFilterChange(callback) {
+        const next = (data) => {
+            this.setData(data);
+        }
+        this.filter.onFilterChange(callback, next);
     }
 
     initUI(dom) {
@@ -142,10 +155,7 @@ export default class JsTable {
         this.templateHead = `
             ${this.filter.render()}
             <div class="jstable-jhiypfe">
-                <div class="jstable-jhiypfey">
-                    <span class="jstable-jhiypfey5">Bộ lọc lưu sẵn <img src="${icons.arrowDown}"></span>
-                    <ul class="jstable-jhiypfeyr"></ul>
-                </div>
+                ${this.filter.renderSave()}
                 ${this.column.render()}
             </div>
         `;
