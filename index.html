@@ -555,82 +555,82 @@
             {
                 "data": "FIELD1",
                 "title": "Biển số xe",
-                "width": 120,
+                "data-width": 120,
             },
             {
                 "data": "FIELD2",
                 "title": "Tổng Km đã đi",
-                "width": 120,
+                "data-width": 120,
             }, {
                 "data": "FIELD3",
                 "title": "Thời gian di chuyển",
-                "width": 170,
+                "data-width": 170,
             },
             {
                 "data": "FIELD4",
                 "title": "Số lần dừng/đỗ",
-                "width": 120,
+                "data-width": 120,
             },
             {
                 "data": "FIELD5",
                 "title": "Thời gian dừng/đỗ",
-                "width": 170,
+                "data-width": 170,
             },
             {
                 "data": "FIELD6",
                 "title": "Thời gian dừng xe nổ máy",
-                "width": 170,
+                "data-width": 170,
             },
             {
                 "data": "FIELD7",
                 "title": "Số lần vượt tốc độ",
-                "width": 120,
+                "data-width": 120,
             },
             {
                 "data": "FIELD8",
                 "title": "Tốc độ lớn nhất km/h",
-                "width": 140,
+                "data-width": 140,
             },
             {
                 "data": "FIELD9",
                 "title": "Thời điểm bắt đầu",
-                "width": 170,
+                "data-width": 170,
             },
             {
                 "data": "FIELD10",
                 "title": "Thời điểm kết thúc",
-                "width": 170,
+                "data-width": 170,
             }, {
                 "data": "FIELD11",
                 "title": "Vị trí bắt đầu",
-                "width": 260,
+                "data-width": 260,
             },
             {
                 "data": "FIELD12",
                 "title": "Vị trí kết thúc",
-                "width": 270,
+                "data-width": 270,
             }, {
                 "data": "FIELD13",
                 "title": "Xe tiêu thụ định mức (L)",
-                "width": 120,
+                "data-width": 120,
             },
             {
                 "data": "FIELD14",
                 "title": "Nhiên liệu tiêu thụ cảm biến",
-                "width": 120,
+                "data-width": 120,
             }, {
                 "data": "FIELD15",
                 "title": "Thời gian xe nổ máy",
-                "width": 170,
+                "data-width": 170,
             },
             {
                 "data": "FIELD16",
                 "title": "Số lần đóng mở cửa",
-                "width": 120,
+                "data-width": 120,
             }, {
                 "data": "FIELD17",
                 "title": "Thời gian bật điều hòa",
-                "width": 170,
+                "data-width": 170,
             }
         ],
         filters: [
@@ -678,6 +678,17 @@
                     {id: '3', name: 'Nghệ An'},
                 ]
             }
+        ],
+        cellRenders: [
+            {
+                field: 'FIELD2', // tên trường data
+                render: (dataCell, dataRow) => {
+                    return `
+                    <span>${dataCell}</span>
+                    <span style="display: block">Nội dung khác</span>
+                `
+                }
+            }
         ]
     });
 
@@ -699,6 +710,12 @@
         // after update data
         next(newData);
     });
+
+    // Cập nhật bộ lọc đã lưu
+    jsTable.onUpdateFilterSaved((filter) => {
+        // Trả về bộ lọc đã được thay đổi hoặc thêm mới
+        console.log('filter saved: ', filter);
+    })
 </script>
 </body>
 </html>

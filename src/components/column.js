@@ -107,7 +107,6 @@ export default class Column {
             pin.addEventListener('click', () => {
                 column.pined = !column.pined;
                 pinEvent();
-
             });
             const eyeEvent = () => {
                 if (!column.hidden) {
@@ -160,18 +159,30 @@ export default class Column {
         // });
         this.elements.colsSum.innerText = this.columns.length;
         this.elements.colsCurrent.innerText = this.columns.filter(x => !x.hidden).length;
-
-        this.updateTable(newColumns, newColumns.filter(x => x.pined).length)
+        let checkPined = -1;
+        newColumns.map((x, index) => x.pined ? checkPined = index : null);
+        this.updateTable(newColumns, (checkPined + 1))
     }
 
     updateSize() {
         // let totalWidth = 0;
         // let maxWidth = this.table.currentDom.clientWidth;
         // let count = this.columns.filter(x => !x.hidden).length;
-        // this.columns.filter(x => !x.hidden).map((x) => totalWidth += x.width);
+        // this.columns.filter(x => !x.hidden).map((x) => totalWidth += x['data-width']);
         // let sizePadding = (maxWidth - totalWidth) / (count - 1);
         // console.log(totalWidth, maxWidth);
         // console.log(sizePadding);
+        // this.table.currentDom.querySelectorAll('.jstb-cell-space').forEach((value) => {
+        //     const lastChild = this.table.currentDom.querySelector('.dataTable thead > tr > th:last-child .jstb-cell-space');
+        //     if (value === lastChild) {
+        //         return;
+        //     }
+        //     if (sizePadding > 0) {
+        //         value.style.width = sizePadding + 'px';
+        //     } else {
+        //         value.style.width = '0px';
+        //     }
+        // });
         //
         // if (sizePadding > 0) {
         //     const cols = this.columns.filter(x => !x.hidden);
