@@ -47,12 +47,12 @@ export default class JsTable {
             data: [],
             columns: this.columns.map((x, index) => {
                 const isEnd = index === this.columns.length - 1;
-                x.width = x['data-width'] + (!isEnd ? this.sizePadding : 0);
+                // x.width = x['data-width'] + (!isEnd ? this.sizePadding : 0);
                 return x;
             }),
             colReorder: true,
             colResize: true,
-            autoWidth: false,
+            autoWidth: true,
             scrollX: true,
             fixedColumns: {
                 leftColumns: 0
@@ -91,7 +91,7 @@ export default class JsTable {
                 targets: index,
                 render: (data, type, row) => {
                     return `
-                        <div class="jstb-cell-view"><span style="width: ${column['data-width']}px" class="jstb-cell-data">${data}</span><span class="jstb-cell-space" style="width: ${!isEnd ? this.sizePadding : 0}px">${!isEnd ? this.sizePadding : 0}px</span></div>
+                        <div class="jstb-cell-view"><span class="jstb-cell-data">${data}</span><span class="jstb-cell-space" style="width: ${!isEnd ? this.sizePadding : 0}px">${!isEnd ? this.sizePadding : 0}px</span></div>
                     `;
                 },
             }
@@ -99,7 +99,7 @@ export default class JsTable {
             if (render) {
                 result.render = (data, type, row) => {
                     return `
-                        <div class="jstb-cell-view"><span style="width: ${column['data-width']}px" class="jstb-cell-data">${render.render(data, row)}</span><span class="jstb-cell-space" style="width: ${!isEnd ? this.sizePadding : 0}px">${!isEnd ? this.sizePadding : 0}px</span></div>
+                        <div class="jstb-cell-view"><span class="jstb-cell-data">${render.render(data, row)}</span><span class="jstb-cell-space" style="width: ${!isEnd ? this.sizePadding : 0}px">${!isEnd ? this.sizePadding : 0}px</span></div>
                     `;
                 };
             }
@@ -133,7 +133,7 @@ export default class JsTable {
             const text = value.innerText;
             const col = this.columns[value.getAttribute('data-column-index').trim()]
             value.innerHTML = `
-                <div class="jstb-cellhead"><span class="jstb-cellhead-data" style="width: ${col['data-width']}px">${text}</span><span style="width: ${!isEnd ? this.sizePadding : 0}px" class="jstb-cell-space">${!isEnd ? this.sizePadding : 0}px</span></div>
+                <div class="jstb-cellhead"><span class="jstb-cellhead-data" >${text}</span><span style="width: ${!isEnd ? this.sizePadding : 0}px" class="jstb-cell-space">${!isEnd ? this.sizePadding : 0}px</span></div>
             `;
         })
     }
@@ -207,6 +207,7 @@ export default class JsTable {
         this.data = data;
         this.table.clear();
         this.table.rows.add(data).draw();
+        this.table.columns.adjust();
     }
 
     events() {
