@@ -1101,3 +1101,10 @@ span.jstb-cell-space {
 /*    display: block;*/
 /*    flex: 1;*/
 /*}*/
+span.jstb-cellhead-data {
+    flex: 1;
+}
+
+span.jstb-cell-data {
+    flex: 1;
+}
