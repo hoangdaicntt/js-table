@@ -28,13 +28,13 @@ td {
     white-space: nowrap;
 }
 
-/*table td:first-child, table th:first-child {*/
-/*    padding-left: 16px;*/
-/*}*/
+table td:first-child, table th:first-child {
+    padding-left: 16px;
+}
 
-/*table td:last-child, table th:last-child {*/
-/*    padding-right: 16px;*/
-/*}*/
+table td:last-child, table th:last-child {
+    padding-right: 16px;
+}
 
 th {
     font-family: Roboto;

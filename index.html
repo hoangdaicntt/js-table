@@ -11,711 +11,715 @@
 
 <script src="dist/jstable.js"></script>
 <script>
-    function shuffleArray(array) {
-        for (var i = array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-        }
+  function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
     }
+  }
 
-    let data = [
-        {
-            "FIELD1": "29C9-6519",
-            "FIELD2": "3200.12",
-            "FIELD3": "1 tháng 12 ngày 6 giờ",
-            "FIELD4": "552",
-            "FIELD5": "12 ngày 17 giờ 45 phút",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Phù Chẩn, Từ Sơn, Thị xã Từ Sơn, Tỉnh Bắc Ninh, Việt Nam",
-            "FIELD12": "Chi Đông, Hà Nội, Huyện Mê Linh, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "5 phút 20 giây"
-        },
-        {
-            "FIELD1": "29C9-9818",
-            "FIELD2": "8816.39",
-            "FIELD3": "1 tháng 3 ngày 9 giờ",
-            "FIELD4": "1831",
-            "FIELD5": "21 ngày 14 giờ 50 phút",
-            "FIELD6": "10 giây",
-            "FIELD7": "2",
-            "FIELD8": "113",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Phong Châu, Phù Ninh, Tỉnh Phú Thọ, Việt Nam",
-            "FIELD12": "158, Phố Lê Thanh Nghị, Thổ Quan, Hà Nội, Quận Hai Bà Trưng, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "3 phút 13 giây",
-            "FIELD16": "0",
-            "FIELD17": "7 giờ 7 phút 8 giây"
-        },
-        {
-            "FIELD1": "29H2-4320",
-            "FIELD2": "3023.44",
-            "FIELD3": "1 tháng 8 ngày 6 giờ",
-            "FIELD4": "215",
-            "FIELD5": "16 ngày 17 giờ 51 phút",
-            "FIELD6": "1 phút 7 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Quốc lộ 2A, Hà Nội, Sóc Sơn, Việt Nam",
-            "FIELD12": "KCN Quang Châu, Bắc Ninh, Tỉnh Bắc Ninh, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "1 phút 7 giây",
-            "FIELD16": "0",
-            "FIELD17": "5 giờ 21 phút 46 giây"
-        },
-        {
-            "FIELD1": "29H2-7682",
-            "FIELD2": "10.9",
-            "FIELD3": "1 tháng 24 ngày 21 giờ",
-            "FIELD4": "6",
-            "FIELD5": "2 giờ 37 phút 7 giây",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Đông Ngạc, Hà Nội, Huyện Đông Anh, Việt Nam",
-            "FIELD12": "KCN Bắc Thăng Long, Đông Ngạc, Hà Nội, Huyện Đông Anh, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "1 phút 11 giây"
-        },
-        {
-            "FIELD1": "29C9-9690",
-            "FIELD2": "3192.45",
-            "FIELD3": "1 tháng 8 ngày 6 giờ",
-            "FIELD4": "621",
-            "FIELD5": "16 ngày 17 giờ 30 phút",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Hội Xá, Phúc Lợi, Hà Nội, Quận Long Biên, Việt Nam",
-            "FIELD12": "Ngõ 285 Phúc Lợi, Hội Xá, Phúc Lợi, Hà Nội, Quận Long Biên, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "3 giờ 22 phút 18 giây"
-        },
-        {
-            "FIELD1": "29C9-3863",
-            "FIELD2": "3090.95",
-            "FIELD3": "1 tháng 20 ngày 5 giờ",
-            "FIELD4": "157",
-            "FIELD5": "4 ngày 18 giờ 14 phút",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Hà Nội, Huyện Đông Anh, Việt Nam",
-            "FIELD12": "Doi Sóc, Phù Chẩn, Từ Sơn, Thị xã Từ Sơn, Tỉnh Bắc Ninh, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "1 giờ 4 phút 40 giây"
-        },
-        {
-            "FIELD1": "29H7-0681",
-            "FIELD2": "3586.78",
-            "FIELD3": "1 tháng 11 ngày 9 giờ",
-            "FIELD4": "645",
-            "FIELD5": "13 ngày 14 giờ 15 phút",
-            "FIELD6": "7 phút 10 giây",
-            "FIELD7": "68",
-            "FIELD8": "86",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Cầu Thanh Trì, Cự Khối, Hà Nội, Quận Hoàng Mai, Việt Nam",
-            "FIELD12": "Hà Nội, Lương Sơn, Hòa Bình, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "10 phút 55 giây",
-            "FIELD16": "0",
-            "FIELD17": "7 giờ 7 phút 55 giây"
-        },
-        {
-            "FIELD1": "29C4-4229",
-            "FIELD2": "3997.04",
-            "FIELD3": "1 tháng 14 ngày 14 giờ",
-            "FIELD4": "424",
-            "FIELD5": "10 ngày 9 giờ 4 phút",
-            "FIELD6": "0 giây",
-            "FIELD7": "61",
-            "FIELD8": "88",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Ngõ 127, Làng Thành Công, Thành Công, Hà Nội, Quận Thanh Xuân, Việt Nam",
-            "FIELD12": "524, Đường Láng, Làng Thành Công, Thành Công, Hà Nội, Quận Đống Đa, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "1 phút 3 giây"
-        },
-        {
-            "FIELD1": "29C9-5593",
-            "FIELD2": "2848.03",
-            "FIELD3": "1 tháng 11 ngày 20 giờ",
-            "FIELD4": "647",
-            "FIELD5": "13 ngày 3 giờ 25 phút",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Hà Nội, Sóc Sơn, Việt Nam",
-            "FIELD12": "Hà Nội, Sóc Sơn, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "2 phút 50 giây"
-        },
-        {
-            "FIELD1": "29H3-2044",
-            "FIELD2": "27.61",
-            "FIELD3": "1 tháng 24 ngày 21 giờ",
-            "FIELD4": "3",
-            "FIELD5": "2 giờ 35 phút 44 giây",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Chờ, Yên Phong, Tỉnh Bắc Ninh, Việt Nam",
-            "FIELD12": "Hà Nội, Sóc Sơn, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "2 phút 56 giây"
-        },
-        {
-            "FIELD1": "29C9-6519",
-            "FIELD2": "3200.12",
-            "FIELD3": "1 tháng 12 ngày 6 giờ",
-            "FIELD4": "552",
-            "FIELD5": "12 ngày 17 giờ 45 phút",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Phù Chẩn, Từ Sơn, Thị xã Từ Sơn, Tỉnh Bắc Ninh, Việt Nam",
-            "FIELD12": "Chi Đông, Hà Nội, Huyện Mê Linh, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "5 phút 20 giây"
-        },
-        {
-            "FIELD1": "29C9-9818",
-            "FIELD2": "8816.39",
-            "FIELD3": "1 tháng 3 ngày 9 giờ",
-            "FIELD4": "1831",
-            "FIELD5": "21 ngày 14 giờ 50 phút",
-            "FIELD6": "10 giây",
-            "FIELD7": "2",
-            "FIELD8": "113",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Phong Châu, Phù Ninh, Tỉnh Phú Thọ, Việt Nam",
-            "FIELD12": "158, Phố Lê Thanh Nghị, Thổ Quan, Hà Nội, Quận Hai Bà Trưng, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "3 phút 13 giây",
-            "FIELD16": "0",
-            "FIELD17": "7 giờ 7 phút 8 giây"
-        },
-        {
-            "FIELD1": "29H2-4320",
-            "FIELD2": "3023.44",
-            "FIELD3": "1 tháng 8 ngày 6 giờ",
-            "FIELD4": "215",
-            "FIELD5": "16 ngày 17 giờ 51 phút",
-            "FIELD6": "1 phút 7 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Quốc lộ 2A, Hà Nội, Sóc Sơn, Việt Nam",
-            "FIELD12": "KCN Quang Châu, Bắc Ninh, Tỉnh Bắc Ninh, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "1 phút 7 giây",
-            "FIELD16": "0",
-            "FIELD17": "5 giờ 21 phút 46 giây"
-        },
-        {
-            "FIELD1": "29H2-7682",
-            "FIELD2": "10.9",
-            "FIELD3": "1 tháng 24 ngày 21 giờ",
-            "FIELD4": "6",
-            "FIELD5": "2 giờ 37 phút 7 giây",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Đông Ngạc, Hà Nội, Huyện Đông Anh, Việt Nam",
-            "FIELD12": "KCN Bắc Thăng Long, Đông Ngạc, Hà Nội, Huyện Đông Anh, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "1 phút 11 giây"
-        },
-        {
-            "FIELD1": "29C9-9690",
-            "FIELD2": "3192.45",
-            "FIELD3": "1 tháng 8 ngày 6 giờ",
-            "FIELD4": "621",
-            "FIELD5": "16 ngày 17 giờ 30 phút",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Hội Xá, Phúc Lợi, Hà Nội, Quận Long Biên, Việt Nam",
-            "FIELD12": "Ngõ 285 Phúc Lợi, Hội Xá, Phúc Lợi, Hà Nội, Quận Long Biên, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "3 giờ 22 phút 18 giây"
-        },
-        {
-            "FIELD1": "29C9-3863",
-            "FIELD2": "3090.95",
-            "FIELD3": "1 tháng 20 ngày 5 giờ",
-            "FIELD4": "157",
-            "FIELD5": "4 ngày 18 giờ 14 phút",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Hà Nội, Huyện Đông Anh, Việt Nam",
-            "FIELD12": "Doi Sóc, Phù Chẩn, Từ Sơn, Thị xã Từ Sơn, Tỉnh Bắc Ninh, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "1 giờ 4 phút 40 giây"
-        },
-        {
-            "FIELD1": "29H7-0681",
-            "FIELD2": "3586.78",
-            "FIELD3": "1 tháng 11 ngày 9 giờ",
-            "FIELD4": "645",
-            "FIELD5": "13 ngày 14 giờ 15 phút",
-            "FIELD6": "7 phút 10 giây",
-            "FIELD7": "68",
-            "FIELD8": "86",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Cầu Thanh Trì, Cự Khối, Hà Nội, Quận Hoàng Mai, Việt Nam",
-            "FIELD12": "Hà Nội, Lương Sơn, Hòa Bình, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "10 phút 55 giây",
-            "FIELD16": "0",
-            "FIELD17": "7 giờ 7 phút 55 giây"
-        },
-        {
-            "FIELD1": "29C4-4229",
-            "FIELD2": "3997.04",
-            "FIELD3": "1 tháng 14 ngày 14 giờ",
-            "FIELD4": "424",
-            "FIELD5": "10 ngày 9 giờ 4 phút",
-            "FIELD6": "0 giây",
-            "FIELD7": "61",
-            "FIELD8": "88",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Ngõ 127, Làng Thành Công, Thành Công, Hà Nội, Quận Thanh Xuân, Việt Nam",
-            "FIELD12": "524, Đường Láng, Làng Thành Công, Thành Công, Hà Nội, Quận Đống Đa, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "1 phút 3 giây"
-        },
-        {
-            "FIELD1": "29C9-5593",
-            "FIELD2": "2848.03",
-            "FIELD3": "1 tháng 11 ngày 20 giờ",
-            "FIELD4": "647",
-            "FIELD5": "13 ngày 3 giờ 25 phút",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Hà Nội, Sóc Sơn, Việt Nam",
-            "FIELD12": "Hà Nội, Sóc Sơn, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "2 phút 50 giây"
-        },
-        {
-            "FIELD1": "29H3-2044",
-            "FIELD2": "27.61",
-            "FIELD3": "1 tháng 24 ngày 21 giờ",
-            "FIELD4": "3",
-            "FIELD5": "2 giờ 35 phút 44 giây",
-            "FIELD6": "0 giây",
-            "FIELD7": "0",
-            "FIELD8": "0",
-            "FIELD9": "31/12/2020 0:00",
-            "FIELD10": "24/02/2021 0:00",
-            "FIELD11": "Chờ, Yên Phong, Tỉnh Bắc Ninh, Việt Nam",
-            "FIELD12": "Hà Nội, Sóc Sơn, Việt Nam",
-            "FIELD13": "0",
-            "FIELD14": "0",
-            "FIELD15": "0 giây",
-            "FIELD16": "0",
-            "FIELD17": "2 phút 56 giây"
-        }
-    ];
-    // for (let i = 0; i < 5; i++) {
-    //     data = [...data, ...data];
-    // }
-    // shuffleArray(data);
+  let data = [
+    {
+      "FIELD1": "29C9-6519",
+      "FIELD2": "3200.12",
+      "FIELD3": "1 tháng 12 ngày 6 giờ",
+      "FIELD4": "552",
+      "FIELD5": "12 ngày 17 giờ 45 phút",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Phù Chẩn, Từ Sơn, Thị xã Từ Sơn, Tỉnh Bắc Ninh, Việt Nam",
+      "FIELD12": "Chi Đông, Hà Nội, Huyện Mê Linh, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "5 phút 20 giây"
+    },
+    {
+      "FIELD1": "29C9-9818",
+      "FIELD2": "8816.39",
+      "FIELD3": "1 tháng 3 ngày 9 giờ",
+      "FIELD4": "1831",
+      "FIELD5": "21 ngày 14 giờ 50 phút",
+      "FIELD6": "10 giây",
+      "FIELD7": "2",
+      "FIELD8": "113",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Phong Châu, Phù Ninh, Tỉnh Phú Thọ, Việt Nam",
+      "FIELD12": "158, Phố Lê Thanh Nghị, Thổ Quan, Hà Nội, Quận Hai Bà Trưng, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "3 phút 13 giây",
+      "FIELD16": "0",
+      "FIELD17": "7 giờ 7 phút 8 giây"
+    },
+    {
+      "FIELD1": "29H2-4320",
+      "FIELD2": "3023.44",
+      "FIELD3": "1 tháng 8 ngày 6 giờ",
+      "FIELD4": "215",
+      "FIELD5": "16 ngày 17 giờ 51 phút",
+      "FIELD6": "1 phút 7 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Quốc lộ 2A, Hà Nội, Sóc Sơn, Việt Nam",
+      "FIELD12": "KCN Quang Châu, Bắc Ninh, Tỉnh Bắc Ninh, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "1 phút 7 giây",
+      "FIELD16": "0",
+      "FIELD17": "5 giờ 21 phút 46 giây"
+    },
+    {
+      "FIELD1": "29H2-7682",
+      "FIELD2": "10.9",
+      "FIELD3": "1 tháng 24 ngày 21 giờ",
+      "FIELD4": "6",
+      "FIELD5": "2 giờ 37 phút 7 giây",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Đông Ngạc, Hà Nội, Huyện Đông Anh, Việt Nam",
+      "FIELD12": "KCN Bắc Thăng Long, Đông Ngạc, Hà Nội, Huyện Đông Anh, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "1 phút 11 giây"
+    },
+    {
+      "FIELD1": "29C9-9690",
+      "FIELD2": "3192.45",
+      "FIELD3": "1 tháng 8 ngày 6 giờ",
+      "FIELD4": "621",
+      "FIELD5": "16 ngày 17 giờ 30 phút",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Hội Xá, Phúc Lợi, Hà Nội, Quận Long Biên, Việt Nam",
+      "FIELD12": "Ngõ 285 Phúc Lợi, Hội Xá, Phúc Lợi, Hà Nội, Quận Long Biên, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "3 giờ 22 phút 18 giây"
+    },
+    {
+      "FIELD1": "29C9-3863",
+      "FIELD2": "3090.95",
+      "FIELD3": "1 tháng 20 ngày 5 giờ",
+      "FIELD4": "157",
+      "FIELD5": "4 ngày 18 giờ 14 phút",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Hà Nội, Huyện Đông Anh, Việt Nam",
+      "FIELD12": "Doi Sóc, Phù Chẩn, Từ Sơn, Thị xã Từ Sơn, Tỉnh Bắc Ninh, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "1 giờ 4 phút 40 giây"
+    },
+    {
+      "FIELD1": "29H7-0681",
+      "FIELD2": "3586.78",
+      "FIELD3": "1 tháng 11 ngày 9 giờ",
+      "FIELD4": "645",
+      "FIELD5": "13 ngày 14 giờ 15 phút",
+      "FIELD6": "7 phút 10 giây",
+      "FIELD7": "68",
+      "FIELD8": "86",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Cầu Thanh Trì, Cự Khối, Hà Nội, Quận Hoàng Mai, Việt Nam",
+      "FIELD12": "Hà Nội, Lương Sơn, Hòa Bình, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "10 phút 55 giây",
+      "FIELD16": "0",
+      "FIELD17": "7 giờ 7 phút 55 giây"
+    },
+    {
+      "FIELD1": "29C4-4229",
+      "FIELD2": "3997.04",
+      "FIELD3": "1 tháng 14 ngày 14 giờ",
+      "FIELD4": "424",
+      "FIELD5": "10 ngày 9 giờ 4 phút",
+      "FIELD6": "0 giây",
+      "FIELD7": "61",
+      "FIELD8": "88",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Ngõ 127, Làng Thành Công, Thành Công, Hà Nội, Quận Thanh Xuân, Việt Nam",
+      "FIELD12": "524, Đường Láng, Làng Thành Công, Thành Công, Hà Nội, Quận Đống Đa, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "1 phút 3 giây"
+    },
+    {
+      "FIELD1": "29C9-5593",
+      "FIELD2": "2848.03",
+      "FIELD3": "1 tháng 11 ngày 20 giờ",
+      "FIELD4": "647",
+      "FIELD5": "13 ngày 3 giờ 25 phút",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Hà Nội, Sóc Sơn, Việt Nam",
+      "FIELD12": "Hà Nội, Sóc Sơn, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "2 phút 50 giây"
+    },
+    {
+      "FIELD1": "29H3-2044",
+      "FIELD2": "27.61",
+      "FIELD3": "1 tháng 24 ngày 21 giờ",
+      "FIELD4": "3",
+      "FIELD5": "2 giờ 35 phút 44 giây",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Chờ, Yên Phong, Tỉnh Bắc Ninh, Việt Nam",
+      "FIELD12": "Hà Nội, Sóc Sơn, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "2 phút 56 giây"
+    },
+    {
+      "FIELD1": "29C9-6519",
+      "FIELD2": "3200.12",
+      "FIELD3": "1 tháng 12 ngày 6 giờ",
+      "FIELD4": "552",
+      "FIELD5": "12 ngày 17 giờ 45 phút",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Phù Chẩn, Từ Sơn, Thị xã Từ Sơn, Tỉnh Bắc Ninh, Việt Nam",
+      "FIELD12": "Chi Đông, Hà Nội, Huyện Mê Linh, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "5 phút 20 giây"
+    },
+    {
+      "FIELD1": "29C9-9818",
+      "FIELD2": "8816.39",
+      "FIELD3": "1 tháng 3 ngày 9 giờ",
+      "FIELD4": "1831",
+      "FIELD5": "21 ngày 14 giờ 50 phút",
+      "FIELD6": "10 giây",
+      "FIELD7": "2",
+      "FIELD8": "113",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Phong Châu, Phù Ninh, Tỉnh Phú Thọ, Việt Nam",
+      "FIELD12": "158, Phố Lê Thanh Nghị, Thổ Quan, Hà Nội, Quận Hai Bà Trưng, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "3 phút 13 giây",
+      "FIELD16": "0",
+      "FIELD17": "7 giờ 7 phút 8 giây"
+    },
+    {
+      "FIELD1": "29H2-4320",
+      "FIELD2": "3023.44",
+      "FIELD3": "1 tháng 8 ngày 6 giờ",
+      "FIELD4": "215",
+      "FIELD5": "16 ngày 17 giờ 51 phút",
+      "FIELD6": "1 phút 7 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Quốc lộ 2A, Hà Nội, Sóc Sơn, Việt Nam",
+      "FIELD12": "KCN Quang Châu, Bắc Ninh, Tỉnh Bắc Ninh, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "1 phút 7 giây",
+      "FIELD16": "0",
+      "FIELD17": "5 giờ 21 phút 46 giây"
+    },
+    {
+      "FIELD1": "29H2-7682",
+      "FIELD2": "10.9",
+      "FIELD3": "1 tháng 24 ngày 21 giờ",
+      "FIELD4": "6",
+      "FIELD5": "2 giờ 37 phút 7 giây",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Đông Ngạc, Hà Nội, Huyện Đông Anh, Việt Nam",
+      "FIELD12": "KCN Bắc Thăng Long, Đông Ngạc, Hà Nội, Huyện Đông Anh, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "1 phút 11 giây"
+    },
+    {
+      "FIELD1": "29C9-9690",
+      "FIELD2": "3192.45",
+      "FIELD3": "1 tháng 8 ngày 6 giờ",
+      "FIELD4": "621",
+      "FIELD5": "16 ngày 17 giờ 30 phút",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Hội Xá, Phúc Lợi, Hà Nội, Quận Long Biên, Việt Nam",
+      "FIELD12": "Ngõ 285 Phúc Lợi, Hội Xá, Phúc Lợi, Hà Nội, Quận Long Biên, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "3 giờ 22 phút 18 giây"
+    },
+    {
+      "FIELD1": "29C9-3863",
+      "FIELD2": "3090.95",
+      "FIELD3": "1 tháng 20 ngày 5 giờ",
+      "FIELD4": "157",
+      "FIELD5": "4 ngày 18 giờ 14 phút",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Hà Nội, Huyện Đông Anh, Việt Nam",
+      "FIELD12": "Doi Sóc, Phù Chẩn, Từ Sơn, Thị xã Từ Sơn, Tỉnh Bắc Ninh, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "1 giờ 4 phút 40 giây"
+    },
+    {
+      "FIELD1": "29H7-0681",
+      "FIELD2": "3586.78",
+      "FIELD3": "1 tháng 11 ngày 9 giờ",
+      "FIELD4": "645",
+      "FIELD5": "13 ngày 14 giờ 15 phút",
+      "FIELD6": "7 phút 10 giây",
+      "FIELD7": "68",
+      "FIELD8": "86",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Cầu Thanh Trì, Cự Khối, Hà Nội, Quận Hoàng Mai, Việt Nam",
+      "FIELD12": "Hà Nội, Lương Sơn, Hòa Bình, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "10 phút 55 giây",
+      "FIELD16": "0",
+      "FIELD17": "7 giờ 7 phút 55 giây"
+    },
+    {
+      "FIELD1": "29C4-4229",
+      "FIELD2": "3997.04",
+      "FIELD3": "1 tháng 14 ngày 14 giờ",
+      "FIELD4": "424",
+      "FIELD5": "10 ngày 9 giờ 4 phút",
+      "FIELD6": "0 giây",
+      "FIELD7": "61",
+      "FIELD8": "88",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Ngõ 127, Làng Thành Công, Thành Công, Hà Nội, Quận Thanh Xuân, Việt Nam",
+      "FIELD12": "524, Đường Láng, Làng Thành Công, Thành Công, Hà Nội, Quận Đống Đa, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "1 phút 3 giây"
+    },
+    {
+      "FIELD1": "29C9-5593",
+      "FIELD2": "2848.03",
+      "FIELD3": "1 tháng 11 ngày 20 giờ",
+      "FIELD4": "647",
+      "FIELD5": "13 ngày 3 giờ 25 phút",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Hà Nội, Sóc Sơn, Việt Nam",
+      "FIELD12": "Hà Nội, Sóc Sơn, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "2 phút 50 giây"
+    },
+    {
+      "FIELD1": "29H3-2044",
+      "FIELD2": "27.61",
+      "FIELD3": "1 tháng 24 ngày 21 giờ",
+      "FIELD4": "3",
+      "FIELD5": "2 giờ 35 phút 44 giây",
+      "FIELD6": "0 giây",
+      "FIELD7": "0",
+      "FIELD8": "0",
+      "FIELD9": "31/12/2020 0:00",
+      "FIELD10": "24/02/2021 0:00",
+      "FIELD11": "Chờ, Yên Phong, Tỉnh Bắc Ninh, Việt Nam",
+      "FIELD12": "Hà Nội, Sóc Sơn, Việt Nam",
+      "FIELD13": "0",
+      "FIELD14": "0",
+      "FIELD15": "0 giây",
+      "FIELD16": "0",
+      "FIELD17": "2 phút 56 giây"
+    }
+  ];
+  // for (let i = 0; i < 5; i++) {
+  //     data = [...data, ...data];
+  // }
+  // shuffleArray(data);
 
-    // Example filters
-    const filtersSaved = [
-        {
-            name: 'Bộ lọc đã lưu 1',
-            createdAt: '07/03/2021 23:00',
-            createdBy: {
-                name: 'Trần Quang Minh',
-                description: 'TP. Kinh Doanh',
-                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
-            },
-            description: '',
-            filters: [{
-                "name": "Độ tuổi",
-                "type": "range",
-                "value": {"operator": "<=", "value": "56"}
-            }, {
-                "name": "Theo nhóm xe",
-                "type": "selection",
-                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
-                    "id": "1",
-                    "name": "Nhóm xe tự tạo 3",
-                    "checked": true
-                }]
-            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
-        },
-        {
-            name: 'Bộ lọc đã lưu 1',
-            createdAt: '07/03/2021 23:00',
-            createdBy: {
-                name: 'Trần Quang Minh',
-                description: 'TP. Kinh Doanh',
-                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
-            },
-            description: '',
-            filters: [{
-                "name": "Độ tuổi",
-                "type": "range",
-                "value": {"operator": "<=", "value": "56"}
-            }, {
-                "name": "Theo nhóm xe",
-                "type": "selection",
-                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
-                    "id": "1",
-                    "name": "Nhóm xe tự tạo 3",
-                    "checked": true
-                }]
-            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
-        },
-        {
-            name: 'Bộ lọc đã lưu 1',
-            createdAt: '07/03/2021 23:00',
-            createdBy: {
-                name: 'Trần Quang Minh',
-                description: 'TP. Kinh Doanh',
-                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
-            },
-            description: '',
-            filters: [{
-                "name": "Độ tuổi",
-                "type": "range",
-                "value": {"operator": "<=", "value": "56"}
-            }, {
-                "name": "Theo nhóm xe",
-                "type": "selection",
-                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
-                    "id": "1",
-                    "name": "Nhóm xe tự tạo 3",
-                    "checked": true
-                }]
-            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
-        },
-        {
-            name: 'Bộ lọc đã lưu 1',
-            createdAt: '07/03/2021 23:00',
-            createdBy: {
-                name: 'Trần Quang Minh',
-                description: 'TP. Kinh Doanh',
-                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
-            },
-            description: '',
-            filters: [{
-                "name": "Độ tuổi",
-                "type": "range",
-                "value": {"operator": "<=", "value": "56"}
-            }, {
-                "name": "Theo nhóm xe",
-                "type": "selection",
-                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
-                    "id": "1",
-                    "name": "Nhóm xe tự tạo 3",
-                    "checked": true
-                }]
-            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
-        },
-        {
-            name: 'Bộ lọc đã lưu 1',
-            createdAt: '07/03/2021 23:00',
-            createdBy: {
-                name: 'Trần Quang Minh',
-                description: 'TP. Kinh Doanh',
-                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
-            },
-            description: '',
-            filters: [{
-                "name": "Độ tuổi",
-                "type": "range",
-                "value": {"operator": "<=", "value": "56"}
-            }, {
-                "name": "Theo nhóm xe",
-                "type": "selection",
-                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
-                    "id": "1",
-                    "name": "Nhóm xe tự tạo 3",
-                    "checked": true
-                }]
-            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
-        },
-        {
-            name: 'Bộ lọc đã lưu 1',
-            createdAt: '07/03/2021 23:00',
-            createdBy: {
-                name: 'Trần Quang Minh',
-                description: 'TP. Kinh Doanh',
-                avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
-            },
-            description: '',
-            filters: [{
-                "name": "Độ tuổi",
-                "type": "range",
-                "value": {"operator": "<=", "value": "56"}
-            }, {
-                "name": "Theo nhóm xe",
-                "type": "selection",
-                "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
-                    "id": "1",
-                    "name": "Nhóm xe tự tạo 3",
-                    "checked": true
-                }]
-            }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
-        }
-    ];
+  // Example filters
+  const filtersSaved = [
+    {
+      name: 'Bộ lọc đã lưu 1',
+      createdAt: '07/03/2021 23:00',
+      createdBy: {
+        name: 'Trần Quang Minh',
+        description: 'TP. Kinh Doanh',
+        avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+      },
+      description: '',
+      filters: [{
+        "name": "Độ tuổi",
+        "type": "range",
+        "value": {"operator": "<=", "value": "56"}
+      }, {
+        "name": "Theo nhóm xe",
+        "type": "selection",
+        "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+          "id": "1",
+          "name": "Nhóm xe tự tạo 3",
+          "checked": true
+        }]
+      }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+    },
+    {
+      name: 'Bộ lọc đã lưu 1',
+      createdAt: '07/03/2021 23:00',
+      createdBy: {
+        name: 'Trần Quang Minh',
+        description: 'TP. Kinh Doanh',
+        avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+      },
+      description: '',
+      filters: [{
+        "name": "Độ tuổi",
+        "type": "range",
+        "value": {"operator": "<=", "value": "56"}
+      }, {
+        "name": "Theo nhóm xe",
+        "type": "selection",
+        "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+          "id": "1",
+          "name": "Nhóm xe tự tạo 3",
+          "checked": true
+        }]
+      }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+    },
+    {
+      name: 'Bộ lọc đã lưu 1',
+      createdAt: '07/03/2021 23:00',
+      createdBy: {
+        name: 'Trần Quang Minh',
+        description: 'TP. Kinh Doanh',
+        avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+      },
+      description: '',
+      filters: [{
+        "name": "Độ tuổi",
+        "type": "range",
+        "value": {"operator": "<=", "value": "56"}
+      }, {
+        "name": "Theo nhóm xe",
+        "type": "selection",
+        "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+          "id": "1",
+          "name": "Nhóm xe tự tạo 3",
+          "checked": true
+        }]
+      }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+    },
+    {
+      name: 'Bộ lọc đã lưu 1',
+      createdAt: '07/03/2021 23:00',
+      createdBy: {
+        name: 'Trần Quang Minh',
+        description: 'TP. Kinh Doanh',
+        avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+      },
+      description: '',
+      filters: [{
+        "name": "Độ tuổi",
+        "type": "range",
+        "value": {"operator": "<=", "value": "56"}
+      }, {
+        "name": "Theo nhóm xe",
+        "type": "selection",
+        "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+          "id": "1",
+          "name": "Nhóm xe tự tạo 3",
+          "checked": true
+        }]
+      }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+    },
+    {
+      name: 'Bộ lọc đã lưu 1',
+      createdAt: '07/03/2021 23:00',
+      createdBy: {
+        name: 'Trần Quang Minh',
+        description: 'TP. Kinh Doanh',
+        avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+      },
+      description: '',
+      filters: [{
+        "name": "Độ tuổi",
+        "type": "range",
+        "value": {"operator": "<=", "value": "56"}
+      }, {
+        "name": "Theo nhóm xe",
+        "type": "selection",
+        "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+          "id": "1",
+          "name": "Nhóm xe tự tạo 3",
+          "checked": true
+        }]
+      }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+    },
+    {
+      name: 'Bộ lọc đã lưu 1',
+      createdAt: '07/03/2021 23:00',
+      createdBy: {
+        name: 'Trần Quang Minh',
+        description: 'TP. Kinh Doanh',
+        avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+      },
+      description: '',
+      filters: [{
+        "name": "Độ tuổi",
+        "type": "range",
+        "value": {"operator": "<=", "value": "56"}
+      }, {
+        "name": "Theo nhóm xe",
+        "type": "selection",
+        "value": [{"id": "1", "name": "Nhóm xe tự tạo 1", "checked": true}, {
+          "id": "1",
+          "name": "Nhóm xe tự tạo 3",
+          "checked": true
+        }]
+      }, {"name": "Giới tính", "type": "option", "value": {"id": "nam", "name": "Nam"}}]
+    }
+  ];
 
 
-    const jsTable = new JSTable('#js-table', {
-        columns: [
-            {
-                "data": "FIELD1",
-                "title": "Biển số xe",
-                "data-width": 120,
-            },
-            {
-                "data": "FIELD2",
-                "title": "Tổng Km đã đi",
-                "data-width": 120,
-            }, {
-                "data": "FIELD3",
-                "title": "Thời gian di chuyển",
-                "data-width": 170,
-            },
-            {
-                "data": "FIELD4",
-                "title": "Số lần dừng/đỗ",
-                "data-width": 120,
-            },
-            {
-                "data": "FIELD5",
-                "title": "Thời gian dừng/đỗ",
-                "data-width": 170,
-            },
-            {
-                "data": "FIELD6",
-                "title": "Thời gian dừng xe nổ máy",
-                "data-width": 170,
-            },
-            {
-                "data": "FIELD7",
-                "title": "Số lần vượt tốc độ",
-                "data-width": 120,
-            },
-            {
-                "data": "FIELD8",
-                "title": "Tốc độ lớn nhất km/h",
-                "data-width": 140,
-            },
-            {
-                "data": "FIELD9",
-                "title": "Thời điểm bắt đầu",
-                "data-width": 170,
-            },
-            {
-                "data": "FIELD10",
-                "title": "Thời điểm kết thúc",
-                "data-width": 170,
-            }, {
-                "data": "FIELD11",
-                "title": "Vị trí bắt đầu",
-                "data-width": 260,
-            },
-            {
-                "data": "FIELD12",
-                "title": "Vị trí kết thúc",
-                "data-width": 270,
-            }, {
-                "data": "FIELD13",
-                "title": "Xe tiêu thụ định mức (L)",
-                "data-width": 120,
-            },
-            {
-                "data": "FIELD14",
-                "title": "Nhiên liệu tiêu thụ cảm biến",
-                "data-width": 120,
-            }, {
-                "data": "FIELD15",
-                "title": "Thời gian xe nổ máy",
-                "data-width": 170,
-            },
-            {
-                "data": "FIELD16",
-                "title": "Số lần đóng mở cửa",
-                "data-width": 120,
-            }, {
-                "data": "FIELD17",
-                "title": "Thời gian bật điều hòa",
-                "data-width": 170,
-            }
-        ],
-        filters: [
-            {
-                id: 'old',
-                name: 'Độ tuổi',
-                type: 'range'
-            },
-            {
-                id: 'group',
-                name: 'Theo nhóm xe',
-                type: 'selection',
-                options: [
-                    {id: '1', name: 'Nhóm xe tự tạo 0'},
-                    {id: '1', name: 'Nhóm xe tự tạo 1'},
-                    {id: '1', name: 'Nhóm xe tự tạo 2'},
-                    {id: '1', name: 'Nhóm xe tự tạo 3'},
-                    {id: '1', name: 'Nhóm xe tự tạo 4'},
-                    {id: '1', name: 'Nhóm xe tự tạo 5'},
-                    {id: '1', name: 'Nhóm xe tự tạo 6'},
-                    {id: '1', name: 'Nhóm xe tự tạo 7'},
-                    {id: '1', name: 'Nhóm xe tự tạo 8'},
-                    {id: '1', name: 'Nhóm xe tự tạo 9'},
-                    {id: '1', name: 'Nhóm xe tự tạo 10'},
-                    {id: '1', name: 'Nhóm xe tự tạo 11'},
-                ]
-            },
-            {
-                id: 'group',
-                name: 'Giới tính',
-                type: 'option',
-                options: [
-                    {id: 'nam', name: 'Nam'},
-                    {id: 'nu', name: 'Nữ'},
-                    {id: 'none', name: 'Không rõ'},
-                ]
-            },
-            {
-                id: 'group',
-                name: 'Quê quán',
-                type: 'option',
-                options: [
-                    {id: '1', name: 'Hà Nội'},
-                    {id: '2', name: 'Hồ Chí Minh'},
-                    {id: '3', name: 'Nghệ An'},
-                ]
-            }
-        ],
-        cellRenders: [
-            {
-                field: 'FIELD2', // tên trường data
-                render: (dataCell, dataRow) => {
-                    return `
+  const jsTable = new JSTable('#js-table', {
+    columns: [
+      {
+        "data": "FIELD1",
+        "title": "Biển số xe",
+        "data-width": 120,
+      },
+      {
+        "data": "FIELD2",
+        "title": "Tổng Km đã đi",
+        "data-width": 120,
+      }, {
+        "data": "FIELD3",
+        "title": "Thời gian di chuyển",
+        "data-width": 170,
+      },
+      {
+        "data": "FIELD4",
+        "title": "Số lần dừng/đỗ",
+        "data-width": 120,
+      },
+      {
+        "data": "FIELD5",
+        "title": "Thời gian dừng/đỗ",
+        "data-width": 170,
+      },
+      {
+        "data": "FIELD6",
+        "title": "Thời gian dừng xe nổ máy",
+        "data-width": 170,
+      },
+      {
+        "data": "FIELD7",
+        "title": "Số lần vượt tốc độ",
+        "data-width": 120,
+      },
+      {
+        "data": "FIELD8",
+        "title": "Tốc độ lớn nhất km/h",
+        "data-width": 140,
+      },
+      {
+        "data": "FIELD9",
+        "title": "Thời điểm bắt đầu",
+        "data-width": 170,
+      },
+      {
+        "data": "FIELD10",
+        "title": "Thời điểm kết thúc",
+        "data-width": 170,
+      }, {
+        "data": "FIELD11",
+        "title": "Vị trí bắt đầu",
+        "data-width": 260,
+      },
+      {
+        "data": "FIELD12",
+        "title": "Vị trí kết thúc",
+        "data-width": 270,
+      }, {
+        "data": "FIELD13",
+        "title": "Xe tiêu thụ định mức (L)",
+        "data-width": 120,
+      },
+      {
+        "data": "FIELD14",
+        "title": "Nhiên liệu tiêu thụ cảm biến",
+        "data-width": 120,
+      }, {
+        "data": "FIELD15",
+        "title": "Thời gian xe nổ máy",
+        "data-width": 170,
+      },
+      {
+        "data": "FIELD16",
+        "title": "Số lần đóng mở cửa",
+        "data-width": 120,
+      }, {
+        "data": "FIELD17",
+        "title": "Thời gian bật điều hòa",
+        "data-width": 170,
+      }
+    ],
+    filters: [
+      {
+        id: 'old',
+        name: 'Độ tuổi',
+        type: 'range'
+      },
+      {
+        id: 'group',
+        name: 'Theo nhóm xe',
+        type: 'selection',
+        options: [
+          {id: '1', name: 'Nhóm xe tự tạo 0'},
+          {id: '1', name: 'Nhóm xe tự tạo 1'},
+          {id: '1', name: 'Nhóm xe tự tạo 2'},
+          {id: '1', name: 'Nhóm xe tự tạo 3'},
+          {id: '1', name: 'Nhóm xe tự tạo 4'},
+          {id: '1', name: 'Nhóm xe tự tạo 5'},
+          {id: '1', name: 'Nhóm xe tự tạo 6'},
+          {id: '1', name: 'Nhóm xe tự tạo 7'},
+          {id: '1', name: 'Nhóm xe tự tạo 8'},
+          {id: '1', name: 'Nhóm xe tự tạo 9'},
+          {id: '1', name: 'Nhóm xe tự tạo 10'},
+          {id: '1', name: 'Nhóm xe tự tạo 11'},
+        ]
+      },
+      {
+        id: 'group',
+        name: 'Giới tính',
+        type: 'option',
+        options: [
+          {id: 'nam', name: 'Nam'},
+          {id: 'nu', name: 'Nữ'},
+          {id: 'none', name: 'Không rõ'},
+        ]
+      },
+      {
+        id: 'group',
+        name: 'Quê quán',
+        type: 'option',
+        options: [
+          {id: '1', name: 'Hà Nội'},
+          {id: '2', name: 'Hồ Chí Minh'},
+          {id: '3', name: 'Nghệ An'},
+        ]
+      }
+    ],
+    cellRenders: [
+      {
+        field: 'FIELD2', // tên trường data
+        render: (dataCell, dataRow) => {
+          return `
                     <span>${dataCell}</span>
                     <span style="display: block">Nội dung khác</span>
                 `
-                }
-            }
-        ]
-    });
+        }
+      }
+    ]
+  });
 
-    jsTable.setData(data);
+  jsTable.setData(data);
+  jsTable.setFiltersSaved(filtersSaved);
+
+  jsTable.onUpdateColumns((columns) => {
+    console.log('new columns', columns);
+  });
+
+  jsTable.onFilterChange((filters, next) => {
+    console.log(JSON.stringify(filters));
+    console.log('new filters', filters);
+    // filter here
+    // example
+    const newData = filters.length > 0 ? data.filter(x => x.FIELD4 === "647") : data;
+    //.....
+
+    // after update data
+    next(newData);
+  });
+
+  // Cập nhật bộ lọc đã lưu
+  jsTable.onUpdateFilterSaved((filter) => {
+    // Trả về bộ lọc đã được thay đổi hoặc thêm mới
+    console.log('filter saved: ', filter);
+    // Lưu bộ lọc lên server...
+    //.........
+    // Sau đó cập nhật lại ds bộ lọc
     jsTable.setFiltersSaved(filtersSaved);
-
-    jsTable.onUpdateColumns((columns) => {
-        console.log('new columns', columns);
-    });
-
-    jsTable.onFilterChange((filters, next) => {
-        console.log(JSON.stringify(filters));
-        console.log('new filters', filters);
-        // filter here
-        // example
-        const newData = filters.length > 0 ? data.filter(x => x.FIELD4 === "647") : data;
-        //.....
-
-        // after update data
-        next(newData);
-    });
-
-    // Cập nhật bộ lọc đã lưu
-    jsTable.onUpdateFilterSaved((filter) => {
-        // Trả về bộ lọc đã được thay đổi hoặc thêm mới
-        console.log('filter saved: ', filter);
-    })
+  })
 </script>
 </body>
 </html>

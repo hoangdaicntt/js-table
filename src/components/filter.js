@@ -5,12 +5,12 @@ import JsSelect from "js-select-hd";
 import FilterBox from "./filterBox";
 
 export default class Filter {
-    constructor() {
-        this.currentFilters = [];
-    }
+  constructor() {
+    this.currentFilters = [];
+  }
 
-    renderSave() {
-        return `<div class="jstable-jhiypfey">
+  renderSave() {
+    return `<div class="jstable-jhiypfey">
                     <span class="jstable-jhiypfey5">Bộ lọc lưu sẵn <img src="${icons.arrowDown}"></span>
                     <div class="jstable-jhiypfeyr">
                         <button class="jstable-jhiypfeyrvk">
@@ -20,10 +20,10 @@ export default class Filter {
                         <ul class="jstable-jhiypfeyr3d"></ul>
                     </div>
                 </div>` + this.renderModalFilter();
-    }
+  }
 
-    renderModalFilter() {
-        return `
+  renderModalFilter() {
+    return `
             <div class="jstable-yowxtedf2" style="display: none">
                     <div class="jstable-yowxte3"></div>
                     <div class="jstable-yowxte4 w800 xview" style="display: none">
@@ -73,126 +73,128 @@ export default class Filter {
                     </div>
                 </div>
         `
+  }
+
+
+  init(table, container, options = {filters: [], filtersSaved: []}) {
+    this.container = container;
+    this.table = table;
+    this.filtersSaved = options.filtersSaved;
+    this.filterBox = options.filterBox;
+    this.elements = {
+      buttonFilterSave: this.container.querySelector('.jstable-jhiypfeyrvk'),
+      buttonOpenFilterSave: this.container.querySelector('.jstable-jhiypfey5'),
+      listFilterSave: this.container.querySelector('.jstable-jhiypfeyr3d'),
+      containerFilterSave: this.container.querySelector('.jstable-jhiypfeyr'),
+      tableSaveFilter: this.container.querySelector('.jstable-yowxterhyo'),
+      modalSaveFilter: this.container.querySelector('.jstable-yowxtedf2'),
+      modalCloseSaveFilter: this.container.querySelector('.jstable-yowxteydrt'),
+      filterBoxContent: this.container.querySelector('.jstable-filebox'),
+      inputName: this.container.querySelector('.jstable-yowxtreds8'),
+      inputDesc: this.container.querySelector('.jstable-yowxt5xreds8'),
+      btnSave: this.container.querySelector('.jstable-yowxteydrsto'),
+      btnClose: this.container.querySelector('.jstable-yowxteydrto'),
+      viewModal: this.container.querySelector('.jstable-yowxte4.xview'),
+      editModal: this.container.querySelector('.jstable-yowxte4.xedit'),
+      titleEditModal: this.container.querySelector('.jstable-yowxte6.editl>span'),
+      buttonAdd: this.container.querySelector('.opsue'),
+      closeModalEdit: this.container.querySelector('.jstable-yowxte75.dor'),
     }
+    this.modalFilterBox = new FilterBox();
+    this.elements.filterBoxContent.innerHTML = this.modalFilterBox.render();
+    this.modalFilterBox.init(this.table, this.elements.filterBoxContent, {
+      filters: options.filters
+    });
 
+    this.renderFilterSaveList();
+    this.openView();
+    this.events();
+  }
 
-    init(table, container, options = {filters: [], filtersSaved: []}) {
-        this.container = container;
-        this.table = table;
-        this.filtersSaved = options.filtersSaved;
-        this.filterBox = options.filterBox;
-        this.elements = {
-            buttonFilterSave: this.container.querySelector('.jstable-jhiypfeyrvk'),
-            buttonOpenFilterSave: this.container.querySelector('.jstable-jhiypfey5'),
-            listFilterSave: this.container.querySelector('.jstable-jhiypfeyr3d'),
-            containerFilterSave: this.container.querySelector('.jstable-jhiypfeyr'),
-            tableSaveFilter: this.container.querySelector('.jstable-yowxterhyo'),
-            modalSaveFilter: this.container.querySelector('.jstable-yowxtedf2'),
-            modalCloseSaveFilter: this.container.querySelector('.jstable-yowxteydrt'),
-            filterBoxContent: this.container.querySelector('.jstable-filebox'),
-            inputName: this.container.querySelector('.jstable-yowxtreds8'),
-            inputDesc: this.container.querySelector('.jstable-yowxt5xreds8'),
-            btnSave: this.container.querySelector('.jstable-yowxteydrsto'),
-            btnClose: this.container.querySelector('.jstable-yowxteydrto'),
-            viewModal: this.container.querySelector('.jstable-yowxte4.xview'),
-            editModal: this.container.querySelector('.jstable-yowxte4.xedit'),
-            titleEditModal: this.container.querySelector('.jstable-yowxte6.editl>span'),
-            buttonAdd: this.container.querySelector('.opsue'),
-            closeModalEdit: this.container.querySelector('.jstable-yowxte75.dor'),
-        }
-        this.modalFilterBox = new FilterBox();
-        this.elements.filterBoxContent.innerHTML = this.modalFilterBox.render();
-        this.modalFilterBox.init(this.table, this.elements.filterBoxContent, {
-            filters: options.filters
-        });
+  openView() {
+    this.elements.viewModal.style.display = 'block';
+    this.elements.editModal.style.display = 'none';
+  }
 
-        this.renderFilterSaveList();
-        this.openView();
-        this.events();
+  openEdit(mode, filter) {
+    this.selectedFilter = filter;
+    this.mode = mode;
+    this.elements.viewModal.style.display = 'none';
+    this.elements.editModal.style.display = 'block';
+    this.modalFilterBox.elements.saveAllFilter.style.display = 'none';
+    this.modalFilterBox.setViewOnly(true);
+    if (mode === 'view') {
+      this.elements.titleEditModal.innerText = filter.name;
+      this.elements.inputName.value = filter.name;
+      this.elements.inputDesc.value = filter.description;
+      this.modalFilterBox.currentFilters = filter.filters;
+      this.modalFilterBox.renderCurrentFilters();
+      this.modalFilterBox.setViewOnly(false);
+      this.elements.btnSave.style.display = 'none';
     }
-
-    openView() {
-        this.elements.viewModal.style.display = 'block';
-        this.elements.editModal.style.display = 'none';
+    if (mode === 'edit') {
+      this.elements.titleEditModal.innerText = 'Chỉnh sửa bộ lọc';
+      this.elements.inputName.value = filter.name;
+      this.elements.inputDesc.value = filter.description;
+      this.modalFilterBox.currentFilters = filter.filters;
+      this.modalFilterBox.renderCurrentFilters();
+      this.elements.btnSave.style.display = 'block';
+      this.elements.btnSave.innerText = 'Cập nhật';
     }
-
-    openEdit(mode, filter) {
-        this.selectedFilter = filter;
-        this.mode = mode;
-        this.elements.viewModal.style.display = 'none';
-        this.elements.editModal.style.display = 'block';
-        this.modalFilterBox.setViewOnly(true);
-        if (mode === 'view') {
-            this.elements.titleEditModal.innerText = filter.name;
-            this.elements.inputName.value = filter.name;
-            this.elements.inputDesc.value = filter.description;
-            this.modalFilterBox.currentFilters = filter.filters;
-            this.modalFilterBox.renderCurrentFilters();
-            this.modalFilterBox.setViewOnly(false);
-            this.elements.btnSave.style.display = 'none';
-        }
-        if (mode === 'edit') {
-            this.elements.titleEditModal.innerText = 'Chỉnh sửa bộ lọc';
-            this.elements.inputName.value = filter.name;
-            this.elements.inputDesc.value = filter.description;
-            this.modalFilterBox.currentFilters = filter.filters;
-            this.modalFilterBox.renderCurrentFilters();
-            this.elements.btnSave.style.display = 'block';
-            this.elements.btnSave.innerText = 'Cập nhật';
-        }
-        if (mode === 'add') {
-            this.elements.titleEditModal.innerText = 'Tạo mới bộ lọc';
-            this.elements.inputName.value = '';
-            this.elements.inputDesc.value = '';
-            this.elements.btnSave.style.display = 'block';
-            this.elements.btnSave.innerText = 'Tạo bộ lọc';
-        }
+    if (mode === 'add') {
+      this.elements.titleEditModal.innerText = 'Tạo mới bộ lọc';
+      this.elements.inputName.value = '';
+      this.elements.inputDesc.value = '';
+      this.elements.btnSave.style.display = 'block';
+      this.elements.btnSave.innerText = 'Tạo bộ lọc';
     }
+    this.modalFilterBox.elements.saveAllFilter.style.display = 'none';
+  }
 
-    updateFiltersSaved(filtersSaved) {
-        this.filtersSaved = filtersSaved;
-        this.renderFilterSaveList();
-    }
+  updateFiltersSaved(filtersSaved) {
+    this.filtersSaved = filtersSaved;
+    this.renderFilterSaveList();
+  }
 
-    renderFilterSaveList() {
-        this.elements.tableSaveFilter.innerHTML = '';
-        this.elements.listFilterSave.innerHTML = '';
-        if (this.filtersSaved) {
-            this.filtersSaved.map(value => {
-                const li = document.createElement('li');
-                const span = document.createElement('span');
-                const img = document.createElement('img');
-                this.elements.listFilterSave.appendChild(li);
-                li.appendChild(span);
-                li.appendChild(img);
-                span.innerText = value.name;
-                img.setAttribute('src', icons.edit);
-                li.addEventListener('click', () => {
-                    this.applyFilterSave(value);
-                })
-            });
+  renderFilterSaveList() {
+    this.elements.tableSaveFilter.innerHTML = '';
+    this.elements.listFilterSave.innerHTML = '';
+    if (this.filtersSaved) {
+      this.filtersSaved.map(value => {
+        const li = document.createElement('li');
+        const span = document.createElement('span');
+        const img = document.createElement('img');
+        this.elements.listFilterSave.appendChild(li);
+        li.appendChild(span);
+        li.appendChild(img);
+        span.innerText = value.name;
+        img.setAttribute('src', icons.edit);
+        li.addEventListener('click', () => {
+          this.applyFilterSave(value);
+        })
+      });
 
-            //render table
-            this.filtersSaved.map(value => {
-                const tr = document.createElement('tr');
-                const td1 = document.createElement('td');
-                const td2 = document.createElement('td');
-                const td3 = document.createElement('td');
-                const td4 = document.createElement('td');
-                const td5 = document.createElement('td');
-                const img = document.createElement('img');
-                this.elements.tableSaveFilter.appendChild(tr);
-                img.setAttribute('src', icons.edit)
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                tr.appendChild(td3);
-                tr.appendChild(td4);
-                tr.appendChild(td5);
-                td5.appendChild(img);
-                td1.innerText = value.name;
-                td2.innerText = value.createdAt;
-                td4.innerText = value.description;
-                td3.innerHTML = `
+      //render table
+      this.filtersSaved.map(value => {
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        const td2 = document.createElement('td');
+        const td3 = document.createElement('td');
+        const td4 = document.createElement('td');
+        const td5 = document.createElement('td');
+        const img = document.createElement('img');
+        this.elements.tableSaveFilter.appendChild(tr);
+        img.setAttribute('src', icons.edit)
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        tr.appendChild(td5);
+        td5.appendChild(img);
+        td1.innerText = value.name;
+        td2.innerText = value.createdAt;
+        td4.innerText = value.description;
+        td3.innerHTML = `
                     <div class="jstb-sjjforp">
                         <img src="${value.createdBy.avatar}">
                         <div>
@@ -202,82 +204,92 @@ export default class Filter {
                     </div>
                 `;
 
-                img.addEventListener('click', () => {
-                    this.openEdit('edit', value);
-                });
-                td1.addEventListener('click', () => {
-                    this.openEdit('view', value);
-                });
+        img.addEventListener('click', () => {
+          this.openEdit('edit', value);
+        });
+        td1.addEventListener('click', () => {
+          this.openEdit('view', value);
+        });
 
-            })
-        }
+      })
     }
+  }
 
-    loadInfo() {
-        const info = this.table.page.info();
-    }
+  loadInfo() {
+    const info = this.table.page.info();
+  }
 
 
-    applyFilterSave(ft) {
-        this.filterBox.currentFilters = ft.filters;
+  applyFilterSave(ft) {
+    this.filterBox.currentFilters = ft.filters;
+    this.toggleFilterSaveContent(false);
+    this.filterBox.renderCurrentFilters();
+  }
+
+  events() {
+    this.table.on('draw.dt', () => {
+      this.loadInfo();
+    });
+
+
+    this.elements.buttonOpenFilterSave.addEventListener('click', (evt) => {
+      this.toggleFilterSaveContent(true);
+      this.openView();
+    });
+    this.elements.buttonFilterSave.addEventListener('click', (evt) => {
+      this.toggleModalSave(true);
+    });
+    this.elements.btnClose.addEventListener('click', (evt) => {
+      this.toggleModalSave(false);
+    });
+    this.elements.modalCloseSaveFilter.addEventListener('click', (evt) => {
+      this.toggleModalSave(false);
+    });
+    this.elements.closeModalEdit.addEventListener('click', (evt) => {
+      this.toggleModalSave(false);
+    });
+
+    document.querySelector('body').addEventListener('click', (evt) => {
+      if (!evt.path.find(x => (x === this.elements.listFilterSave) || (x === this.elements.buttonOpenFilterSave))) {
         this.toggleFilterSaveContent(false);
-        this.filterBox.renderCurrentFilters();
-    }
+      }
+    });
+    this.elements.buttonAdd.addEventListener('click', () => {
+      this.openEdit('add', null);
+    });
+    this.elements.btnSave.addEventListener('click', () => {
+      if (!this.selectedFilter) {
+        this.selectedFilter = {};
+        // this.filtersSaved.push({
+        //   name: this.elements.inputName.value,
+        //   createdAt: '',
+        //   createdBy: {},
+        //   description: this.elements.inputDesc.value,
+        //   filters: this.modalFilterBox.currentFilters
+        // });
+      }
+      this.selectedFilter.filters = this.modalFilterBox.currentFilters;
+      this.selectedFilter.name = this.elements.inputName.value;
+      this.selectedFilter.description = this.elements.inputDesc.value;
+      this.onUpdateFilterSavedCallback ? this.onUpdateFilterSavedCallback({
+        mode: this.mode,
+        value: this.selectedFilter
+      }) : null;
+      this.openView();
+      this.renderFilterSaveList();
+    });
+  }
 
-    events() {
-        this.table.on('draw.dt', () => {
-            this.loadInfo();
-        });
+  onUpdateFilterSaved(callback) {
+    this.onUpdateFilterSavedCallback = callback;
+  }
 
+  toggleFilterSaveContent(show) {
+    this.elements.containerFilterSave.style.display = show ? 'block' : 'none';
+  }
 
-        this.elements.buttonOpenFilterSave.addEventListener('click', (evt) => {
-            this.toggleFilterSaveContent(true);
-            this.openView();
-        });
-        this.elements.buttonFilterSave.addEventListener('click', (evt) => {
-            this.toggleModalSave(true);
-        });
-        this.elements.btnClose.addEventListener('click', (evt) => {
-            this.toggleModalSave(false);
-        });
-        this.elements.modalCloseSaveFilter.addEventListener('click', (evt) => {
-            this.toggleModalSave(false);
-        });
-        this.elements.closeModalEdit.addEventListener('click', (evt) => {
-            this.toggleModalSave(false);
-        });
-
-        document.querySelector('body').addEventListener('click', (evt) => {
-            if (!evt.path.find(x => (x === this.elements.listFilterSave) || (x === this.elements.buttonOpenFilterSave))) {
-                this.toggleFilterSaveContent(false);
-            }
-        });
-        this.elements.buttonAdd.addEventListener('click', () => {
-            this.openEdit('add', null);
-        });
-        this.elements.btnSave.addEventListener('click', () => {
-            this.selectedFilter.filters = this.modalFilterBox.currentFilters;
-            this.selectedFilter.name = this.elements.inputName.value;
-            this.selectedFilter.description = this.elements.inputDesc.value;
-            this.onUpdateFilterSavedCallback ? this.onUpdateFilterSavedCallback({
-                mode: this.mode,
-                value: this.selectedFilter
-            }) : null;
-            this.openView();
-            this.renderFilterSaveList();
-        });
-    }
-
-    onUpdateFilterSaved(callback) {
-        this.onUpdateFilterSavedCallback = callback;
-    }
-
-    toggleFilterSaveContent(show) {
-        this.elements.containerFilterSave.style.display = show ? 'block' : 'none';
-    }
-
-    toggleModalSave(show) {
-        this.elements.modalSaveFilter.style.display = show ? 'flex' : 'none';
-    }
+  toggleModalSave(show) {
+    this.elements.modalSaveFilter.style.display = show ? 'flex' : 'none';
+  }
 
 }

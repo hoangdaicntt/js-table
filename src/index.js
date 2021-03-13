@@ -212,20 +212,28 @@ export default class JsTable {
 
   events() {
     this.table.on('draw.dt', () => {
-        // let totalWidth = 0;
-        // this.container.querySelectorAll('.dataTables_scrollHeadInner th .jstb-cellhead-data').forEach(value => {
-        //   console.log(value, value.scrollWidth);
-        //   totalWidth += value.scrollWidth;
-        // });
-        //
-        //
-        // let maxWidth = this.container.clientWidth;
-        // let count = this.columns.filter(x => !x.hidden).length;
-        // this.sizePadding = (maxWidth - totalWidth) / (count - 1);
-        // this.sizePadding = (this.sizePadding > 0 ? this.sizePadding : 16);
-        // this.container.querySelectorAll('.jstb-cell-space').forEach(value => {
-        //   value.style.width = this.sizePadding + 'px';
-        // });
+      // let totalWidth = 0;
+      // this.container.querySelectorAll('.dataTables_scrollHeadInner th .jstb-cellhead-data').forEach(value => {
+      //   console.log(value, value.scrollWidth);
+      //   totalWidth += value.scrollWidth;
+      // });
+      //
+      //
+      // let maxWidth = this.container.clientWidth;
+      // let count = this.columns.filter(x => !x.hidden).length;
+      // this.sizePadding = (maxWidth - totalWidth) / (count - 1);
+      // this.sizePadding = (this.sizePadding > 0 ? this.sizePadding : 16);
+      // this.container.querySelectorAll('.jstb-cell-space').forEach(value => {
+      //   value.style.width = this.sizePadding + 'px';
+      // });
+    });
+
+    this.filterBox.onSave((filter) => {
+      this.filter.toggleModalSave(true);
+      this.filter.openEdit('add', filter);
+      this.filter.modalFilterBox.currentFilters = filter;
+      this.filter.modalFilterBox.renderCurrentFilters();
+      this.filter.modalFilterBox.elements.saveAllFilter.style.display = 'none';
     });
   }
 }
