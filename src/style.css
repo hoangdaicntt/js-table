@@ -1085,10 +1085,11 @@ input.jstable-yowxt5xreds8 {
 
 span.jstb-cell-space {
     display: block;
-    background-color: rgba(255, 0, 0, 0.2);
+    /*background-color: rgba(255, 0, 0, 0.2);*/
     height: 20px;
-    line-height: 20px;
-    font-size: 7px;
+    line-height: 0px;
+    font-size: 0px;
+    opacity: 0;
 }
 
 .jstb-cellhead {
